@@ -1,0 +1,32 @@
+
+
+STATS DAILY / HOURLY:
+- revenue by date
+- revenue by clicks
+- revenue by impressions
+- revenue by hour
+- impressions by date
+- impressions by hour
+- clicks by hour
+- clicks by date
+- total revenue daily /monthly??
+
+
+
+EVENTS DAILY / HOURLY:
+- total events per hour 
+- average events per hour
+
+
+MAP:
+- locations only 
+- revenue by location
+- impressions by location
+- clicks by location
+- total daily events by location
+- total hourly events by location 
+
+--
+- for each location, detailed box for: 
+    - total daily revenue, total impressions, average daily events, average hourly events
+

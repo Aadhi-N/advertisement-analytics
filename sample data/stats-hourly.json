@@ -1,0 +1,26 @@
+
+    {
+        "date": "2017-01-01T05:00:00.000Z",
+        "hour": 0,
+        "impressions": 10746,
+        "clicks": 23,
+        "revenue": "64.9215630000000"
+    } /// ACTUAL
+
+    
+    {
+        "date": "2017-04-23T04:00:00.000Z",
+        "hour": 5,
+        "impressions": 3,
+        "clicks": 0,
+        "revenue": "0.0000000000000",
+        "poi_id": 2
+    },
+    {
+        "date": "2017-01-01T05:00:00.000Z",
+        "hour": 0,
+        "impressions": 10746,
+        "clicks": 23,
+        "revenue": "64.9215630000000",
+        "poi_id": 3
+    },
