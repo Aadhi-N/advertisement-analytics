@@ -1,5 +1,12 @@
 const Dashboard = () => {
-    return (<h1>DASHBOARD</h1>)
+    return (
+
+        <main>
+            OVERVIEW
+            * add a few charts
+            * add other dashboard tools
+        </main>
+    )
 };
 
 export default Dashboard;

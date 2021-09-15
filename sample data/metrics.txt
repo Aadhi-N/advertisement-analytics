@@ -1,15 +1,22 @@
+HOURLY/DAILY/WEEKLY:
+- clicks trend
+- impressions trend
+
+
+HOURLY:
+- average revenue per hour
+- average events per hour
+- clicks per hour
+
+DAILY/WEEKLY:
+- total revenue
+- total events
 
 
 STATS DAILY / HOURLY:
-- revenue by date
 - revenue by clicks
-- revenue by impressions
-- revenue by hour
-- impressions by date
-- impressions by hour
-- clicks by hour
-- clicks by date
-- total revenue daily /monthly??
+- clicks by impressions
+
 
 
 
@@ -30,3 +37,8 @@ MAP:
 - for each location, detailed box for: 
     - total daily revenue, total impressions, average daily events, average hourly events
 
+
+
+
+----
+1. revenue chart 
