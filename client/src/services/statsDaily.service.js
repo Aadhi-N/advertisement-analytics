@@ -12,7 +12,7 @@ import axios from "axios";
             
             
 export function getAllData(){
-    const URLs = ["http://localhost:5555/stats/daily", "http://localhost:5555/stats/hourly"];
+    const URLs = ["http://localhost:5555/stats/daily", "http://localhost:5555/stats/hourly", "http://localhost:5555/all"];
   return Promise.all(URLs.map(fetchData));
 }
 
@@ -29,5 +29,3 @@ function fetchData(URL) {
       return { success: false };
     });
 };
-
-// getAllData(URLs).then(resp=>{console.log(resp)}).catch(e=>{console.log(e)})

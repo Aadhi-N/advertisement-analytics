@@ -61,6 +61,7 @@ const RevenueChart = ({ statsDaily, statsHourly }) => {
         <Container fixed> <h1>Revenue</h1>
             
             <div style={{ width: '100%', height: 300, position:"relative" }}>
+                <div>TOTAL REVENUE, AVG CLICKS PER DAY/WEEK = CARD</div>
                 <ButtonGroup className="timeline-btns" color="primary" aria-label="outlined primary button group">
                     <Button variant={timeline === "hourly" ? "contained" : "outlined"} onClick={()=> toggleTimeline('hourly')}>Hourly</Button>
                     <Button variant={timeline === "daily" ? "contained" : "outlined"} onClick={()=> toggleTimeline('daily')}>Daily</Button>

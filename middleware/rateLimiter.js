@@ -29,7 +29,7 @@ const rateLimiter = (req, res, next) => {
                 newRecord.push(requestLog);
                 redisClient.set(req.ip, JSON.stringify(newRecord));
                 next();
-            } else {
+            } 
                 // If record exists, parse number of requests user made within the last window
                 const data = JSON.parse(record);
                 let windowStartTimestamp = moment().subtract(WINDOW_SIZE_IN_HOURS, "hours").unix();
@@ -64,7 +64,7 @@ const rateLimiter = (req, res, next) => {
                     next();
                 }
 
-            }
+            
 
         });
     } catch (error) {

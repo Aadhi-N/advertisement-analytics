@@ -1,0 +1,6 @@
+SELECT * 
+FROM public.hourly_stats
+LEFT JOIN public.hourly_events ON public.hourly_events.date = public.hourly_stats.date
+LIMIT 7;
+
+[{"date":"2017-04-23T04:00:00.000Z","hour":1,"impressions":3,"clicks":0,"revenue":"0.0000000000000","poi_id":2,"events":11},{"date":"2017-04-23T04:00:00.000Z","hour":9,"impressions":3,"clicks":0,"revenue":"0.0000000000000","poi_id":2,"events":12},{"date":"2017-04-23T04:00:00.000Z","hour":11,"impressions":3,"clicks":0,"revenue":"0.0000000000000","poi_id":4,"events":10},{"date":"2017-01-01T05:00:00.000Z","hour":1,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":4,"events":14},{"date":"2017-01-01T05:00:00.000Z","hour":4,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":3,"events":6},{"date":"2017-01-01T05:00:00.000Z","hour":7,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":3,"events":7},{"date":"2017-01-01T05:00:00.000Z","hour":14,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":4,"events":4}]
