@@ -1,13 +1,15 @@
 
 import RevenueChart from "./RevenueChart";
+import EventsChart from "./EventsChart";
+import ClicksChart from "./ClicksChart";
 
-
-const Charts = () => {
+const Charts = ({ statsDaily, statsHourly }) => {
   
     return (
         <main>
-          <h1>Revenue</h1>
-          <RevenueChart />
+          <RevenueChart statsDaily={statsDaily} statsHourly={statsHourly}/>
+          <EventsChart />
+          <ClicksChart />
         </main>
     )
 };

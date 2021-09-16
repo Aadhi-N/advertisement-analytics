@@ -12,20 +12,23 @@ import Stats from "./components/Stats/Stats";
 import Map from "./components/Map/Map";
 import DataTable from "./components/DataTable/DataTable";
 
+import { getAllData } from "./services/statsDaily.service";
+
 function App() {
 
-  const [post, setPost] = useState(null);
+  const [statsDaily, setStatsDaily] = useState(null);
+  const [statsHourly, setStatsHourly] = useState(null);
 
-  
-    const url = "http://localhost:5555/poi";
 
-    useEffect(() => {
-      axios.get(url).then((response) => {
-        setPost(response.data);
-      });
-    }, []);
-  
-    if (!post) return null;
+  useEffect(() => {
+    getAllData().then((response) => {
+      setStatsDaily(response[0].data.data);
+      setStatsHourly(response[1].data.data)
+    })
+    .catch((error) => setStatsDaily(error))
+  }, []);
+
+  console.log('daily', statsDaily)
   
   return (
     <div style={{display: "flex"}}>
@@ -34,8 +37,8 @@ function App() {
         <NavbarSide />
         <Switch>
           <Route exact path="/dashboard" component={Dashboard}/>
-          <Route exact path="/charts" component={Charts}/>
-          <Route exact path="/map" component={Map}/><Map/>
+          <Route exact path="/charts" render={(props) => <Charts {...props} statsDaily={statsDaily} statsHourly={statsHourly} />}/>
+          <Route exact path="/map" component={Map}/>
           <Route exact path="/all-data" component={DataTable}/>
         </Switch>
       </Router>
