@@ -6,9 +6,7 @@ import "./App.css";
 
 import NavbarTop from "./components/Nav/NavbarTop";
 import NavbarSide from "./components/Nav/NavbarSide";
-import Dashboard from "./components/Dashboard/Dashboard";
 import Charts from "./components/Charts/Charts";
-import Stats from "./components/Stats/Stats";
 import Map from "./components/Map/Map";
 import SearchTable from "./components/SearchTable/SearchTable";
 
@@ -39,7 +37,6 @@ function App() {
         <NavbarTop />
         <NavbarSide />
         <Switch>
-          <Route exact path="/dashboard" component={Dashboard}/>
           <Route exact path="/charts" render={(props) => <Charts {...props} statsDaily={statsDaily} statsHourly={statsHourly} />}/>
           <Route exact path="/map" render={(props) => <Map {...props} mapsData={mapsData}/>}/>
           <Route exact path="/all-data" render={(props) => <SearchTable {...props} tableData={tableData} />} />
