@@ -13,7 +13,6 @@ import Map from "./components/Map/Map";
 import SearchTable from "./components/SearchTable/SearchTable";
 
 import { getAllData } from "./services/statsDaily.service";
-import { fetchData } from "./services/statsDaily.service";
 
 function App() {
 
@@ -21,15 +20,7 @@ function App() {
   const [statsHourly, setStatsHourly] = useState(null);
   const [tableData, setTableData] = useState(null);
   const [mapsData, setMapsData] = useState(null);
-
-
-  useEffect(() => {
-      fetchData("http://localhost:5555/events/location").then((response) => {
-        setMapsData(response.data.data);
-        
-      })
-      .catch((error) => setMapsData(error))
-    }, []);
+  
 
 
   useEffect(() => {
@@ -37,6 +28,7 @@ function App() {
       setStatsDaily(response[0].data.data);
       setStatsHourly(response[1].data.data);
       setTableData(response[2].data.data)
+      setMapsData(response[3].data.data)
     })
     .catch((error) => setStatsDaily(error))
   }, []);
@@ -49,7 +41,7 @@ function App() {
         <Switch>
           <Route exact path="/dashboard" component={Dashboard}/>
           <Route exact path="/charts" render={(props) => <Charts {...props} statsDaily={statsDaily} statsHourly={statsHourly} />}/>
-          <Route exact path="/map" render={(props) => <Map {...props} mapsData={mapsData} />}/>
+          <Route exact path="/map" render={(props) => <Map {...props} mapsData={mapsData}/>}/>
           <Route exact path="/all-data" render={(props) => <SearchTable {...props} tableData={tableData} />} />
         </Switch>
       </Router>
