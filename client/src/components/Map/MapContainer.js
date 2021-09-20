@@ -10,8 +10,8 @@ const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN; // Set your mapbox toke
 
 
 
-const MapContainer = () => {
-    console.log('d', data)
+const MapContainer = ({ hourlyData }) => {
+    // console.log('d', data)
   const [viewport, setViewport] = useState({
     latitude: 40.67,
     longitude: -103.59,
@@ -19,6 +19,7 @@ const MapContainer = () => {
     bearing: 0,
     pitch: 0
   });
+  
   const mapRef = useRef(null);
 
   const onClick = event => {
@@ -42,14 +43,14 @@ const MapContainer = () => {
     });
   };
 
-  console.log('layer', clusterCountLayer)
+  // console.log('layer', clusterCountLayer)
 
   return (
     <>
       <MapGL
         {...viewport}
-        width="800px"
-        height="800px"
+        width="900px"
+        height="500px"
         mapStyle="mapbox://styles/mapbox/dark-v9"
         onViewportChange={setViewport}
         mapboxApiAccessToken={MAPBOX_TOKEN}

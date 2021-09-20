@@ -62,3 +62,32 @@ hour: 1
 lat: 49.2965
 lon: -123.0884
 name: "Vancouver Harbour"
+
+
+///
+SUM of events that match the date 
+select date, SUM(events) AS events from public.hourly_events
+where date='2017-01-01T05:00:00.000Z'
+GROUP BY date
+ORDER BY date
+
+
+
+// total events for each location, matched by date
+SELECT date, i.poi_id, events
+FROM public.hourly_events i
+LEFT JOIN public.poi p ON p.poi_id = i.poi_id
+WHERE i.date='2017-01-01T05:00:00.000Z'
+
+LIMIT 168;
+
+
+
+
+//get summed events by date match
+SELECT date, SUM(events) as events, SUM(hour) as hour, i.poi_id
+FROM public.hourly_events i
+LEFT JOIN public.poi p ON p.poi_id = i.poi_id
+WHERE date='2017-01-01T05:00:00.000Z'
+GROUP BY i.poi_id, i.date
+

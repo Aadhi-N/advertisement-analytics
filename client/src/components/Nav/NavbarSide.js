@@ -54,20 +54,24 @@ const NavbarSide = () => {
                 <div className={classes.drawerContainer}>
                     <List>
                         {['charts', 'map'].map((text, index) => (
-                        <ListItem button key={text}>
+                        <span id="x"><Link to={`/${text}`}>
+                          <ListItem button key={text}>
                             <ListItemIcon>{index % 2 === 0 ? <AssessmentIcon /> : <MapIcon />}</ListItemIcon>
-                            <span id="x"><Link to={`/${text}`}><ListItemText primary={text.charAt(0).toUpperCase() + text.slice(1)} /></Link></span>
-                        </ListItem>
+                            <ListItemText primary={text.charAt(0).toUpperCase() + text.slice(1)} />
+                          </ListItem>
+                        </Link></span>
                         ))}
                     </List>
 
                     <Divider />
                     <List>
                         {['all data'].map((text, index) => (
-                        <ListItem button key={text}>
+                        <span id="x"><Link to={`/all-data`}>
+                          <ListItem button key={text}>
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <span id="x"><Link to={`/all-data`}><ListItemText primary={text.charAt(0).toUpperCase() + text.slice(1)}/></Link></span>
-                        </ListItem>
+                            <ListItemText primary={text.charAt(0).toUpperCase() + text.slice(1)}/>
+                          </ListItem>
+                        </Link></span>
                         ))}
                     </List>
                 </div>

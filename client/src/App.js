@@ -18,6 +18,7 @@ function App() {
   const [statsHourly, setStatsHourly] = useState(null);
   const [tableData, setTableData] = useState(null);
   const [mapsData, setMapsData] = useState(null);
+  const [poiData, setPoiData] = useState(null);
   
 
 
@@ -25,8 +26,9 @@ function App() {
     getAllData().then((response) => {
       setStatsDaily(response[0].data.data);
       setStatsHourly(response[1].data.data);
-      setTableData(response[2].data.data)
-      setMapsData(response[3].data.data)
+      setTableData(response[2].data.data);
+      setMapsData(response[3].data.data);
+      setPoiData(response[4].data.data);
     })
     .catch((error) => setStatsDaily(error))
   }, []);
@@ -38,7 +40,7 @@ function App() {
         <NavbarSide />
         <Switch>
           <Route exact path="/charts" render={(props) => <Charts {...props} statsDaily={statsDaily} statsHourly={statsHourly} />}/>
-          <Route exact path="/map" render={(props) => <Map {...props} mapsData={mapsData}/>}/>
+          <Route exact path="/map" render={(props) => <Map {...props} mapsData={mapsData} poiData={poiData}/>}/>
           <Route exact path="/all-data" render={(props) => <SearchTable {...props} tableData={tableData} />} />
         </Switch>
       </Router>

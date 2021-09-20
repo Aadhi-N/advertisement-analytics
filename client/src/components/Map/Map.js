@@ -1,78 +1,73 @@
 import React, { useRef, useEffect, useState } from 'react';
-import {ReactComponent as Marker1 } from "../../assets/logo.svg"
+import axios from "axios";
+
 
 import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl";
 import useSuperCluster from "use-supercluster";
 import { Container, ButtonGroup, Button, Slider } from "@material-ui/core";
 
+
 import "./Map.styles.css";
-import { fetchData } from "../../services/statsDaily.service";
 import MapContainer from './MapContainer';
 
 
-const Map = ({ mapsData }) => {
+const Map = ({ mapsData, poiData }) => {
+    const [dateInput, setDateInput] = useState('2017-01-01T05:00:00.000Z');
+    const [hourlyData, setHourlyData] = useState([]);
+    const [dailyData, setDailyData] = useState([]);
+
+    const handleChange = (newValue) => {
+      setDateInput(newValue);
+    };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // console.log('dateInput', dateInput)
+      axios
+      .post(`http://localhost:5555/events/${dateInput}/hourly`, {date: dateInput})
+      .then((res) => {
+        console.log('res.data', res.data)
+        setHourlyData(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    };
+
 
     const [timeline, setTimeline] = useState('daily');
     const toggleTimeline = (timeline) => {
         setTimeline(timeline);
     };
 
-    const marks = [
-        {
-          value: 0,
-          label: '1pm',
-        },
-        {
-          value: 1,
-          label: '20°C',
-        },
-        {
-          value: 2,
-          label: '37°C',
-        },
-        {
-          value: 3,
-          label: '100°C',
-        },
-        {
-            value: 4,
-            label: '100°C',
-        },
-        {
-            value: 5,
-            label: '100°C',
-        },
-        {
-            value: 6,
-            label: '100°C',
-        },
-      ];
-      
-      function valuetext(value) {
-        return `${value} PM`;
-      }
 
     return (
         <main>
             <h1>Events by Location</h1>
+
+
+            <form onSubmit={handleSubmit}>        
+              <label>Date:
+                <input name="date" type="text" value={dateInput}/>        
+              </label>
+              <input type="submit" value="Submit" />
+            </form>
+
+           
+           
             <ButtonGroup className="timeline-btns" color="primary" aria-label="outlined primary button group">
                 <Button variant={timeline === "hourly" ? "contained" : "outlined"} onClick={()=> toggleTimeline('hourly')}>Hourly</Button>
                 <Button variant={timeline === "daily" ? "contained" : "outlined"} onClick={()=> toggleTimeline('daily')}>Daily</Button>
             </ButtonGroup>
-            <Slider
-                aria-label="Always visible"
-                defaultValue={1} 
-                step={1} 
-                min={1} 
-                max={24}
-                getAriaValueText={valuetext}
-                marks={marks}
-                valueLabelDisplay="on"
-            />
+            
+        <input type="date" id="start" name="trip-start"
+              value="2018-07-22"
+              min="2018-01-01" max="2018-12-31"/>
+
             <div style={{paddingTop: "30px"}} >
 
                 {mapsData ? (
-                    <MapContainer mapsData={mapsData}/>
+                    <MapContainer hourlyData={hourlyData}/>
                 ) : <p>Loading map...</p> }
             </div>
            

@@ -1,6 +1,10 @@
 const express = require('express');
 const pg = require('pg');
-var cors = require('cors')
+const cors = require('cors')
+const bodyParser = require('body-parser');
+
+const GeoJSON = require('geojson');
+
 const rateLimiter = require("./middleware/rateLimiter");
 
 require('dotenv').config();
@@ -8,11 +12,25 @@ const pool = new pg.Pool();
 
 const app = express();
 
+app.use(express.json())
+
 app.use(cors());
+
 app.use(rateLimiter);
 
 const queryHandler = (req, res, next) => {
   pool.query(req.sqlQuery).then((r) => {
+    return res.json(r.rows || [])
+  }).catch(next)
+}
+
+const queryHandlerToGeoJSON = (req, res, next) => {
+  pool.query(req.sqlQuery).then((r) => {
+   
+    const data = GeoJSON.parse(r.rows, {Point: ['lat', 'lng']}); 
+    // console.log('data', data)
+    return res.json(data);
+
     return res.json(r.rows || [])
   }).catch(next)
 }
@@ -104,7 +122,32 @@ app.get('/poi', (req, res, next) => {
     FROM public.poi;
   `
   return next()
+}, queryHandler);
+
+
+
+app.post('/events/:date', (req, res, next) => {
+  req.sqlQuery = `
+  SELECT date, SUM(events) as events, SUM(hour) as hour, i.poi_id
+  FROM public.hourly_events i
+  LEFT JOIN public.poi p ON p.poi_id = i.poi_id
+  WHERE date='${req.body.date}'
+  GROUP BY i.poi_id, i.date
+
+ `
+  return next()
 }, queryHandler)
+
+app.post('/events/:date/hourly', (req, res, next) => {
+  req.sqlQuery = `
+  SELECT date, events, hour, i.poi_id
+  FROM public.hourly_events i
+  LEFT JOIN public.poi p ON p.poi_id = i.poi_id
+  WHERE date='${req.body.date}'
+ `
+  return next()
+}, queryHandlerToGeoJSON)
+
 
 app.listen(process.env.PORT || 5555, (err) => {
   if (err) {
