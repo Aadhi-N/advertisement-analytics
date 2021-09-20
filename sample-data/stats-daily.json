@@ -1,0 +1,11 @@
+{
+    "date": "2017-01-01T05:00:00.000Z",
+    "impressions": "2764609",
+    "clicks": "3627",
+    "revenue": "13092.1234790000000"
+} //ACTUAL
+
+
+
+[{"date":"2017-04-23T04:00:00.000Z","hour":5,"impressions":3,"clicks":0,"revenue":"0.0000000000000","poi_id":2},
+    {"date":"2017-01-01T05:00:00.000Z","hour":0,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":3},{"date":"2017-01-01T05:00:00.000Z","hour":1,"impressions":141397,"clicks":201,"revenue":"696.4485960000000","poi_id":4},{"date":"2017-01-01T05:00:00.000Z","hour":2,"impressions":137464,"clicks":217,"revenue":"732.0955030000000","poi_id":1},{"date":"2017-01-01T05:00:00.000Z","hour":3,"impressions":109217,"clicks":139,"revenue":"496.6397510000000","poi_id":2},{"date":"2017-01-01T05:00:00.000Z","hour":4,"impressions":112129,"clicks":74,"revenue":"446.7138830000000","poi_id":4},{"date":"2017-01-01T05:00:00.000Z","hour":5,"impressions":105182,"clicks":76,"revenue":"435.9536840000000","poi_id":3}]

@@ -42,10 +42,6 @@ function App() {
           <Route exact path="/all-data" render={(props) => <SearchTable {...props} tableData={tableData} />} />
         </Switch>
       </Router>
-      <main>
-        
-      </main>
-
     </div>
   );
 };

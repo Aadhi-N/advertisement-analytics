@@ -4,3 +4,61 @@ LEFT JOIN public.hourly_events ON public.hourly_events.date = public.hourly_stat
 LIMIT 7;
 
 [{"date":"2017-04-23T04:00:00.000Z","hour":1,"impressions":3,"clicks":0,"revenue":"0.0000000000000","poi_id":2,"events":11},{"date":"2017-04-23T04:00:00.000Z","hour":9,"impressions":3,"clicks":0,"revenue":"0.0000000000000","poi_id":2,"events":12},{"date":"2017-04-23T04:00:00.000Z","hour":11,"impressions":3,"clicks":0,"revenue":"0.0000000000000","poi_id":4,"events":10},{"date":"2017-01-01T05:00:00.000Z","hour":1,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":4,"events":14},{"date":"2017-01-01T05:00:00.000Z","hour":4,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":3,"events":6},{"date":"2017-01-01T05:00:00.000Z","hour":7,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":3,"events":7},{"date":"2017-01-01T05:00:00.000Z","hour":14,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":4,"events":4}]
+
+
+
+ SELECT  i.date AS date, 
+            SUM(i.impressions) AS impressions
+    FROM  public.hourly_stats i
+    INNER JOIN (
+      SELECT date
+      FROM public.hourly_events
+      ) p ON p.date = i.date
+    LEFT OUTER JOIN (
+      SELECT poi_id
+      from public.poi
+    ) x ON x.poi_id = i.poi_id
+   
+    GROUP BY i.date
+    ORDER BY i.date
+    LIMIT 7;
+
+
+[{"date":"2017-01-01T05:00:00.000Z","impressions":"13823045"},{"date":"2017-01-02T05:00:00.000Z","impressions":"3772280"},{"date":"2017-01-03T05:00:00.000Z","impressions":"2886660"},{"date":"2017-01-04T05:00:00.000Z","impressions":"2845722"},{"date":"2017-01-05T05:00:00.000Z","impressions":"952714"},{"date":"2017-01-06T05:00:00.000Z","impressions":"5610160"},{"date":"2017-01-07T05:00:00.000Z","impressions":"4461288"}]
+
+
+
+
+
+
+ SELECT * 
+  FROM public.hourly_stats i
+  LEFT JOIN public.hourly_events ON public.hourly_events.date = i.date
+  LEFT JOIN public.poi ON public.poi.poi_id = i.poi_id
+  ORDER BY i.date, i.hour
+  LIMIT 7;
+  
+[{"date":"2017-01-01T05:00:00.000Z","hour":1,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":3,"events":14,"name":"Niagara Falls","lat":43.0896,"lon":-79.0849},
+
+
+{"date":"2017-01-01T05:00:00.000Z","hour":4,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":3,"events":6,"name":"Niagara Falls","lat":43.0896,"lon":-79.0849},
+
+
+{"date":"2017-01-01T05:00:00.000Z","hour":7,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":3,"events":7,"name":"Niagara Falls","lat":43.0896,"lon":-79.0849},{"date":"2017-01-01T05:00:00.000Z","hour":14,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":3,"events":4,"name":"Niagara Falls","lat":43.0896,"lon":-79.0849},{"date":"2017-01-01T05:00:00.000Z","hour":22,"impressions":10746,"clicks":23,"revenue":"64.9215630000000","poi_id":3,"events":12,"name":"Niagara Falls","lat":43.0896,"lon":-79.0849},{"date":"2017-01-01T05:00:00.000Z","hour":1,"impressions":141397,"clicks":201,"revenue":"696.4485960000000","poi_id":4,"events":14,"name":"Vancouver Harbour","lat":49.2965,"lon":-123.0884},{"date":"2017-01-01T05:00:00.000Z","hour":4,"impressions":141397,"clicks":201,"revenue":"696.4485960000000","poi_id":4,"events":6,"name":"Vancouver Harbour","lat":49.2965,"lon":-123.0884}]
+
+
+
+
+ SELECT *
+  FROM public.hourly_events i
+  LEFT JOIN public.poi p ON p.poi_id = i.poi_id
+  LIMIT 168;
+  `
+
+0:
+date: "2017-01-01T05:00:00.000Z"
+events: 14
+hour: 1
+lat: 49.2965
+lon: -123.0884
+name: "Vancouver Harbour"
