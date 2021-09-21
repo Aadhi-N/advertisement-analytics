@@ -73,21 +73,29 @@ ORDER BY date
 
 
 
-// total events for each location, matched by date
-SELECT date, i.poi_id, events
-FROM public.hourly_events i
-LEFT JOIN public.poi p ON p.poi_id = i.poi_id
-WHERE i.date='2017-01-01T05:00:00.000Z'
+// events, hours, and location, matched by date FOR HOURLY
+SELECT date, events, hour, i.poi_id
+  FROM public.hourly_events i
+  LEFT JOIN public.poi p ON p.poi_id = i.poi_id
+  WHERE date='${req.body.date}'
 
-LIMIT 168;
+date | events | hour | poi_id
+"2017-01-01"	14	1	  4
+"2017-01-01"	6	  4	  3
+"2017-01-01"	7	  7	  3
+"2017-01-01"	4	  14	4
+"2017-01-01"	12	22	4
 
 
 
 
-//get summed events by date match
+//get summed events by date match for DAILY
 SELECT date, SUM(events) as events, SUM(hour) as hour, i.poi_id
 FROM public.hourly_events i
 LEFT JOIN public.poi p ON p.poi_id = i.poi_id
 WHERE date='2017-01-01T05:00:00.000Z'
 GROUP BY i.poi_id, i.date
 
+date | sum events | sum hours | poi_id
+"2017-01-01"	30	37	4
+"2017-01-01"	13	11	3

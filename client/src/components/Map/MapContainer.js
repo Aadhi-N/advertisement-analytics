@@ -1,13 +1,15 @@
 import {useState, useRef} from 'react';
 import {render} from 'react-dom';
-import MapGL, {Source, Layer} from 'react-map-gl';
 
-import {clusterLayer, clusterCountLayer, unclusteredPointLayer} from './layers';
+/* Styles imports */
 import "./Map.styles.css";
 
-const data = require("../../assets/output-file.json");
-const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
+/* React wrapper for Mapbox imports */
+import MapGL, {Source, Layer} from 'react-map-gl';
+import {clusterLayer, clusterCountLayer, unclusteredPointLayer} from './layers';
+const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN; 
 
+const data = require("../../assets/output-file1.json");
 
 
 const MapContainer = ({ hourlyData }) => {
@@ -24,9 +26,9 @@ const MapContainer = ({ hourlyData }) => {
 
   const onClick = event => {
     const feature = event.features[0];
-    const clusterId = feature.properties.cluster_id;
+    const clusterId = feature.properties.cluster_id; //A unqiue id for the cluster to be used in conjunction with the cluster inspection methods
 
-    const mapboxSource = mapRef.current.getMap().getSource('earthquakes');
+    const mapboxSource = mapRef.current.getMap().getSource('output-file');
 
     mapboxSource.getClusterExpansionZoom(clusterId, (err, zoom) => {
       if (err) {
@@ -43,8 +45,6 @@ const MapContainer = ({ hourlyData }) => {
     });
   };
 
-  // console.log('layer', clusterCountLayer)
-
   return (
     <>
       <MapGL
@@ -59,7 +59,7 @@ const MapContainer = ({ hourlyData }) => {
         ref={mapRef}
       >
         <Source
-          id="earthquakes"
+          id="output-file"
           type="geojson"
           data={data}
           cluster={true}

@@ -16,3 +16,5 @@
 OTHER:
 - create node version file 
 - asynchronous issue in rateLimitr middleware
+
+- hack job - including sum of hours in "daily" events table join; 

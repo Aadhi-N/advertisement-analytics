@@ -125,28 +125,30 @@ app.get('/poi', (req, res, next) => {
 }, queryHandler);
 
 
+/* Get date and/or hourly data using given params */
+app.get('/events/map', (req, res, next) => {
+  const dailyQuery = `
+    SELECT date, SUM(events) as events, SUM(hour) as hour, i.poi_id, p.name, p.lat, p.lon
+    FROM public.hourly_events i
+    LEFT JOIN public.poi p ON p.poi_id = i.poi_id
+    WHERE date='${req.query.date}'
+    GROUP BY i.poi_id, i.date, p.name, p.lat, p.lon
+  `;
 
-app.post('/events/:date', (req, res, next) => {
-  req.sqlQuery = `
-  SELECT date, SUM(events) as events, SUM(hour) as hour, i.poi_id
-  FROM public.hourly_events i
-  LEFT JOIN public.poi p ON p.poi_id = i.poi_id
-  WHERE date='${req.body.date}'
-  GROUP BY i.poi_id, i.date
+  const hourlyQuery = `
+    SELECT date, events, hour, i.poi_id
+    FROM public.hourly_events i
+    LEFT JOIN public.poi p ON p.poi_id = i.poi_id
+    WHERE date='${req.query.date}' AND hour='${req.query.hourly}'
+  `;
 
- `
+  if (req.query.hourly) {
+     req.sqlQuery = hourlyQuery
+  } else {
+     req.sqlQuery = dailyQuery
+  }  
   return next()
 }, queryHandler)
-
-app.post('/events/:date/hourly', (req, res, next) => {
-  req.sqlQuery = `
-  SELECT date, events, hour, i.poi_id
-  FROM public.hourly_events i
-  LEFT JOIN public.poi p ON p.poi_id = i.poi_id
-  WHERE date='${req.body.date}'
- `
-  return next()
-}, queryHandlerToGeoJSON)
 
 
 app.listen(process.env.PORT || 5555, (err) => {

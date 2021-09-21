@@ -1,0 +1,20 @@
+[
+    {
+        "date": "2017-01-01T05:00:00.000Z",
+        "events": "13",
+        "hour": "11",
+        "poi_id": 3,
+        "name": "Niagara Falls",
+        "lat": 43.0896,
+        "lon": -79.0849
+    },
+    {
+        "date": "2017-01-01T05:00:00.000Z",
+        "events": "30",
+        "hour": "37",
+        "poi_id": 4,
+        "name": "Vancouver Harbour",
+        "lat": 49.2965,
+        "lon": -123.0884
+    }
+]

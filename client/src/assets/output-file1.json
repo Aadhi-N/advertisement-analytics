@@ -1,0 +1,83 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -123.0884,
+                    49.2965
+                ]
+            },
+            "properties": {
+                "date": "2017-01-01T05:00:00.000Z",
+                "hour": 1,
+                "events": 14,
+                "poi_id": 4,
+                "name": "Vancouver Harbour",
+                "lat": 49.2965,
+                "lon": -123.0884
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.0849,
+                    43.0896
+                ]
+            },
+            "properties": {
+                "date": "2017-01-01T05:00:00.000Z",
+                "hour": 1,
+                "events": 6,
+                "poi_id": 3,
+                "name": "Niagara Falls",
+                "lat": 43.0896,
+                "lon": -79.0849
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.0849,
+                    43.0896
+                ]
+            },
+            "properties": {
+                "date": "2017-01-01T05:00:00.000Z",
+                "hour": 7,
+                "events": 7,
+                "poi_id": 3,
+                "name": "Niagara Falls",
+                "lat": 43.0896,
+                "lon": -79.0849
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3899,
+                    43.6708
+                ]
+            },
+            "properties": {
+                "date": "2017-01-03T05:00:00.000Z",
+                "hour": 8,
+                "events": 3,
+                "poi_id": 1,
+                "name": "EQ Works",
+                "lat": 43.6708,
+                "lon": -79.3899
+            }
+        }
+    ]
+}
+
+
