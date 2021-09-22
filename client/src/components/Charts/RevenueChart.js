@@ -1,12 +1,20 @@
+import { useState } from "react";
+
+/* Time formatter import */
 import moment from "moment";
 
-import { useState, useEffect } from "react";
-
+/* Material-UI components imports */
 import { Container, ButtonGroup, Button } from "@material-ui/core";
 
+/* ReCharts components imports */
 import { ComposedChart, Area, Scatter, Bar, BarChart, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+/* Component imports */
+import StatsCard from "./StatsCard";
+
+/* Styles imports */
 import "./Charts.styles.css";
+
 
 const RevenueChart = ({ statsDaily, statsHourly }) => {
     
@@ -58,15 +66,14 @@ const RevenueChart = ({ statsDaily, statsHourly }) => {
     )
 
     return (
-        <Container fixed> <h1>Revenue</h1>
-            
-            <div style={{ width: '100%', height: 300, position:"relative" }}>
-                <div>TOTAL REVENUE, AVG CLICKS PER DAY/WEEK = CARD</div>
+        <Container> 
+            <h1>Revenue</h1>
+            <div style={{width: "100%", height: "300px", position: "absolute"}}>
                 <ButtonGroup className="timeline-btns" color="primary" aria-label="outlined primary button group">
                     <Button variant={timeline === "hourly" ? "contained" : "outlined"} onClick={()=> toggleTimeline('hourly')}>Hourly</Button>
                     <Button variant={timeline === "daily" ? "contained" : "outlined"} onClick={()=> toggleTimeline('daily')}>Daily</Button>
                 </ButtonGroup>
-                <ResponsiveContainer width="50%" height="100%">
+                <ResponsiveContainer width={700} height="100%">
                     <ComposedChart
                         width={500}
                         height={400}
@@ -82,6 +89,7 @@ const RevenueChart = ({ statsDaily, statsHourly }) => {
                     
                     </ComposedChart>
                 </ResponsiveContainer>
+                <StatsCard stats={ timeline === "daily" ? {date: "Jan 1", revenue: 1234, clicks: 123, text: "daily"} : {date: "Jan 1 - Jan 7", revenue: 12345678, clicks: 12345, text: "weekly"}} />
             </div>
         </Container>
     )

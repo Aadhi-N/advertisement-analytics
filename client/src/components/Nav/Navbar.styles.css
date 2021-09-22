@@ -1,5 +1,31 @@
-#x *  {
+
+:root {
+    display: flex;
+}
+
+.list-item-text *  {
     text-decoration: none;
     font-weight: bold;
     color: black;
+};
+
+.drawer-container {
+    overflow: 'auto';
+    padding-top: "20px";
+};
+
+.content {
+    flex-grow: 1;
+    padding: 100px;
 }
+
+.drawer {
+    width: 240px;
+    flex-shrink: 0;
+};
+
+.drawer > div {
+    width: 240px;
+}
+
+

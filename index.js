@@ -35,9 +35,9 @@ const queryHandlerToGeoJSON = (req, res, next) => {
   }).catch(next)
 }
 
-app.get('/', (req, res) => {
-  res.send('Welcome to EQ Works 😎')
-})
+// app.get('/', (req, res) => {
+//   res.redirect("/dashboard");
+// })
 
 app.get('/events/hourly', (req, res, next) => {
   req.sqlQuery = `

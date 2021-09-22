@@ -44,6 +44,7 @@ const MapContainer = ({ hourlyData }) => {
       });
     });
   };
+  console.log('layers', clusterCountLayer)
 
   return (
     <>

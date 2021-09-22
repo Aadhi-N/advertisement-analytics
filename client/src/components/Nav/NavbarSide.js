@@ -1,63 +1,43 @@
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { AppBar, Toolbar, Typography, Drawer, List, ListItem, Divider, ListItemText} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import AssessmentIcon from '@material-ui/icons/Assessment';
-import MapIcon from '@material-ui/icons/Map';
-
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-
+/* Styles imports */
 import "./Navbar.styles.css";
 
-const drawerWidth = 240;
+/* Material-UI components imports */
+import { Toolbar, Drawer, List, ListItem, Divider, ListItemText} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 
+/* Material-UI icons imports */
+import { MoveToInbox, Dashboard, InsertChart, Map } from "@material-ui/icons";
+
+/* Override Material-UI component styles */
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
   drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerContainer: {
-    overflow: 'auto',
-    paddingTop: "20px"
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
+    width: 240,
+  }
 }));
 
-const NavbarSide = () => {
-    const classes = useStyles();
 
+const NavbarSide = () => {
+  const classes = useStyles()
     return (
         <>
             <Drawer
-                className={classes.drawer}
+                className="drawer"
                 variant="permanent"         
                 classes={{
-                    paper: classes.drawerPaper,
+                  paper: classes.drawerPaper
                 }}
             >
                 <Toolbar />
-
-                <div className={classes.drawerContainer}>
+                <div className="drawer-container">
                     <List>
-                        {['charts', 'map'].map((text, index) => (
-                        <span id="x"><Link to={`/${text}`}>
-                          <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <AssessmentIcon /> : <MapIcon />}</ListItemIcon>
-                            <ListItemText primary={text.charAt(0).toUpperCase() + text.slice(1)} />
+                        {[{text: 'dashboard', icon: <Dashboard/>}, {text: 'charts', icon: <InsertChart/>}, {text: 'map', icon: <Map/>}].map((item, index) => (
+                        <span className="list-item-text"><Link to={`/${item.text}`}>
+                          <ListItem button key={item.text}>
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText primary={item.text.charAt(0).toUpperCase() + item.text.slice(1)} />
                           </ListItem>
                         </Link></span>
                         ))}
@@ -65,11 +45,11 @@ const NavbarSide = () => {
 
                     <Divider />
                     <List>
-                        {['all data'].map((text, index) => (
-                        <span id="x"><Link to={`/all-data`}>
-                          <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text.charAt(0).toUpperCase() + text.slice(1)}/>
+                        {[{text: 'all data', icon: <MoveToInbox/>}].map((item, index) => (
+                        <span className="list-item-text"><Link to={`/all-data`}>
+                          <ListItem button key={item.text}>
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText primary={item.text.charAt(0).toUpperCase() + item.text.slice(1)}/>
                           </ListItem>
                         </Link></span>
                         ))}
