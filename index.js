@@ -3,8 +3,6 @@ const pg = require('pg');
 const cors = require('cors')
 const bodyParser = require('body-parser');
 
-const GeoJSON = require('geojson');
-
 const rateLimiter = require("./middleware/rateLimiter");
 
 require('dotenv').config();
@@ -34,10 +32,6 @@ const queryHandlerToGeoJSON = (req, res, next) => {
     return res.json(r.rows || [])
   }).catch(next)
 }
-
-// app.get('/', (req, res) => {
-//   res.redirect("/dashboard");
-// })
 
 app.get('/events/hourly', (req, res, next) => {
   req.sqlQuery = `
@@ -111,12 +105,14 @@ app.get('/all', (req, res, next) => {
   LEFT JOIN public.hourly_events ON public.hourly_events.date = i.date
   LEFT JOIN public.poi ON public.poi.poi_id = i.poi_id
   ORDER BY i.date, i.hour
+  LIMIT 168;
   `
   return next()
 }, queryHandler);
 
 
 app.get('/poi', (req, res, next) => {
+  console.log('POIIIII')
   req.sqlQuery = `
     SELECT *
     FROM public.poi;

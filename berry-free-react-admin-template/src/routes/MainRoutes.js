@@ -8,6 +8,12 @@ import Loadable from 'ui-component/Loadable';
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 const Table = Loadable(lazy(() => import('views/table')));
 
+/* Parameters for DB query */
+const table = {
+    allData: "stats/all",
+    poi: "poi"
+}
+
 // ===========================|| MAIN ROUTING ||=========================== //
 
 const MainRoutes = {
@@ -24,11 +30,11 @@ const MainRoutes = {
         },
         {
             path: '/data-table/all',
-            element: <Table />
+            element: <Table params={table.allData}/>
         },
         {
             path: '/data-table/poi',
-            element: <Table />
+            element: <Table params={table.poi}/>
         },
         {
             path: '/data-table/stats',
