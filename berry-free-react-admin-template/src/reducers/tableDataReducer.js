@@ -1,42 +1,32 @@
 import {
     SET_TABLE_DATA,
-    API_START,
-    API_END,
-    FETCH_TABLE_DATA
+    TABLE_DATA_ERROR
 } from "../actions/types";
 
-// export const initialState = {
-//     data: []
-// }
+export const initialState = {
+    tableData: [],
+    isLoading: true
+}
 
 // ===========================|| TABLE DATA REDUCER ||=========================== //
 
-function foo(state = {}, action) {
-    console.log("action type => ", action.type);
-    switch (action.type) {
-        case SET_TABLE_DATA: 
-            return { data: action.payload };
-        case API_START:
-            if (action.payload === FETCH_TABLE_DATA) {
-                return {
-                    ...state,
-                    isLoadingData: true
-                };
-            }
-            break;
-        case API_END:
-            if (action.payload === FETCH_TABLE_DATA) {
-                return {
-                    ...state,
-                    isLoadingData: false
-                };
-            }
-            break;
+
+export const tableDataReducer = (state = initialState, {type, payload}) => {
+    switch (type) {
+        case SET_TABLE_DATA:
+            return {
+                ...state, 
+                tableData: payload, 
+                loading: false
+            };
+
+        case TABLE_DATA_ERROR:
+            return {
+                loading: false, 
+                error: payload 
+            }    
+       
         default:
-            return state; 
-    }
+            return state;
+    };
 };
-
-// export default tableDataReducer;
-
-export default foo;

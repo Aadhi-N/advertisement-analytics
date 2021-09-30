@@ -1,79 +1,39 @@
-import { useState, useEffect, Component } from 'react';
-import { connect, useSelector } from "react-redux";
-
-import { fetchArticleDetails } from 'actions/fetchArticleDetails';
-import { fetchTableData } from "actions/fetchTableData";
-
-
-
-class Table extends Component  {
-
-    componentDidMount() {
-           
-            this.props.fetchTableData();
-            // this.props.fetchArticleDetails();
-    }
-
-    componentDidUpdate(prevProps) {
-        // if (this.props.params !== prevProps.params) {
-        //     this.props.fetchTableData()
-        // }
-        this.props.fetchTableData()
-        // this.props.fetchArticleDetails();
-
-        // console.log('props', this.props)
-    }
-        
-        
-    render() {
-    console.log('props', this.props)
-    return (<h2>hey</h2>)
-    }
+import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setTableData } from "../../actions/tableDataActions";
+import { TABLE_DATA_ERROR } from "../../actions/types";
+import TableComponent from "./TableComponent";
 
 
-}
-const mapStateToProps = ({ data = {}, isLoadingData = false }) => ({
-    data,
-    isLoadingData
-});
-  
+const Table = () => {
+    const tableData = useSelector(state => state);
+    const dispatch = useDispatch();
 
-export default connect(
-    mapStateToProps,
-    {
-      fetchTableData
-    }
-)(Table);
-
-
-// const Table = () => {
-    
-//     // const articleDetails = useSelector((state) => state)
-//     // console.log('article', articleDetails)
-//     const [dataLoading, setDataLoading] = useState(false);
-//     const [data, setData] = useState("");
-
-
-//     useEffect(() => {
-//         if (!dataLoading) {
-//             // setData(articleDetails);
-//             var x = fetchTableData();
-        
-//         }
-//         console.log('x', x)
-//     })
-
-//     return (
-//         <>
-//         <p>hey</p>
-//         </>
-//     )
-
-   
-// };
-
-// export default Table;
-
+    const fetchTableData = async () => {
+        const response = await axios
+        .get("http://localhost:5555/poi")
+        .catch((err) => {
+            dispatch( {
+                type: TABLE_DATA_ERROR,
+                payload: err,
+            })
+            console.log("Err", err);
+        });
+        dispatch(setTableData(response.data));
+    };
 
   
 
+    useEffect(() => {
+        fetchTableData();
+    }, []);
+
+    return (
+        <div className="ui grid container">
+            <TableComponent />
+        </div>
+    );
+};
+
+export default Table;
